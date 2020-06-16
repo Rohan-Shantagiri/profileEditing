@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img id="profile" #image [src]="img" height="400px" (load)="onLoad()">
+            <label for="files" class="btn btn-primary" style="margin-left: 100px;">Update Profile pic</label>
+            <input type="file" id="files" (change)="onChange($event)" style="visibility:hidden;" > 
+            <div>PPI = {{ ppi}} </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-6"  >
+                    <div class="details">
+                        Name : {{ name }}
+                    </div>
+                    <div class="details">
+                        Mobile : {{ mobile }}
+                    </div>
+                    <div class="details">
+                        Bio : {{ bio }}
+                    </div>
+                    <div class="details">
+                        Genre : {{  genre}}
+                    </div>
+                    <div>
+                        <img *ngIf="isLoader" id="img" src="assets/images/Spinner.gif" height="70px" width="70px">
+                        <button type="button" id="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#myModal">
+                            Edit profile
+                        </button>
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Profile</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form name="form" #f="ngForm">
+                                            <div class="form-group">
+                                                <label for="Name">Name:</label>
+                                                <input [(ngModel)]="name" name="Name" #Name="ngModel" type="text"
+                                                    class="form-control"
+                                                     required 
+                                                    id="Name" minlength="3">
+                                                <div *ngIf="Name.touched && Name.errors" pattern="[A-Za-z]+"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="Name.errors.required">Name is required</div>
+                                                    <div *ngIf="Name.errors.pattern">Name can have only characters</div>
+                                                    <div *ngIf="Name.errors.minlength">Minimun lenth of name should be 3
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Mobile">Mobile:</label>
+                                                <input [(ngModel)]="mobile" name="Mobile" #Mobile="ngModel"
+                                                    type="text" class="form-control"
+                                                     required 
+                                                    id="Mobile" minlength="10" maxlength="10" pattern="[0-9]*">
+                                                <div *ngIf="Mobile.touched && Mobile.errors" 
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="Mobile.errors.required">Mobile no is required</div>
+                                                    <div *ngIf="Mobile.errors.pattern">Mobile no can have only
+                                                        numbers</div>
+                                                    <div *ngIf="Mobile.errors.minlength">Mobile no can have only 10
+                                                        digits</div>
+                                                    <div *ngIf="Mobile.errors.maxlength">Mobile no can have only 10
+                                                        digits</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Bio">Bio:</label>
+                                                <input [(ngModel)]="bio" name="Bio" #Bio="ngModel" type="text"
+                                                    class="form-control" 
+                                                    required  minlength="50" pattern="[A-za-z ]*"
+                                                    id="Bio">
+                                                <div *ngIf="Bio.touched && Bio.errors" 
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="Bio.errors.required">Bio is required</div>
+                                                    <div *ngIf="Bio.errors.pattern">Bio can have only characters
+                                                    </div>
+                                                    <div *ngIf="Bio.errors.minlength">Bio should have minimum 50
+                                                        characters</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Genre">Genre:</label>
+                                                <select class="form-control" name="Genre" #Genre="ngModel" id="Genre"
+                                                    [(ngModel)]="genre"
+                                                     required>
+                                                    <option value="Dramatic">Dramatic</option>
+                                                    <option value="Comedy">Comedy</option>
+                                                    <option value="Horror">Horror</option>
+                                                </select>
+                                                <div *ngIf="Genre.touched && Genre.errors"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="Genre.errors.required">Genre should be selected
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" [disabled]="f.form.invalid"
+                                                 (click)="f.form.valid && onClick()" formnovalidate>
+                                                 Update</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

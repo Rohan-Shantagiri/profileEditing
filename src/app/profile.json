@@ -1,0 +1,12 @@
+{
+    "profile_pic":"assets/images/profile.jpg",
+    "name":"Venkatesh Mogili",
+    "mobile":8328664336,
+    "bio":"Sample",
+    "genres":[
+              {"id":1,"genre":"Dramatic"},
+              {"id":2,"genre":"Comedy"},
+              {"id":3,"genre":"Horror"}
+            ]    
+}
+    
